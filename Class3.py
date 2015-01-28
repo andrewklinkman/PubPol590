@@ -73,7 +73,7 @@ len(list2)
 #CONVERTING LISTS TO SERIES AND DATAFRAME---------------------
 list4 = range(55,60)
 
-list5 = range(91,100) #list from 0 to m-1
+list5 = range(95,100) #list from 0 to m-1
 
 #list to series (series always have an index)
 s1 = Series(list4)
@@ -82,9 +82,19 @@ s2 = Series(list5)
 s1
 s2
 
-#list to dataframe
+#create dataframe from lists or series
+    #only create with vectors of the same length
+list7 = range(60, 65)
+zip(list4, list5) #think zipper - makes tuples from the same index positions in each list
+zip1 = zip(list4, list5, list7)
+df1 = DataFrame(zip1)
 
+df2 = DataFrame(zip1, columns = ['two', 'apple', ':)'])
+df2[':)']
+df2[['apple', ':)']][0:3] #get 1st, 2nd and 3rd rows of apple and :) columns
 
-
+#make a dataframe using dict notation
+df3 = DataFrame({':(':list4, 9:list5, ':0':list7})#curly brackets = create dictionary object, ordering = alphanumeric
+df3
 
 
