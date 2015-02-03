@@ -76,4 +76,4 @@ rows = df3['consump'].isnull()
 df3[rows]
 
 
-
+#
