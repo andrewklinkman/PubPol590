@@ -27,14 +27,17 @@ csv2 = csv1.drop_duplicates()
 
 #find all rows where consump is null
 csvCons = csv2['consump'].isnull()
+csv2[csv2['consump'].isnull()]
 
 #find duplicates based on panid and date
 t_b = csv2.duplicated(subset = ['panid', 'date'])
 b_t = csv2.duplicated(subset = ['panid', 'date'], take_last = True)
-duplicates = (t_b | b_t)
+csv2[b_t]
+csv2[t_b]
+##duplicates = (t_b | b_t)
 
 #drop all rows where the first two columns are duplicated and the consump is Nan
-dupMissing = (csvCons & duplicates)
+dupMissing = (csvCons & t_b)
 csv3 = csv2[~dupMissing]
 
 #average of remaining consump values
