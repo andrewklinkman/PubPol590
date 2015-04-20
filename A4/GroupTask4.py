@@ -12,7 +12,6 @@ os.chdir(main_dir)
 
 from logit_functions import *
 
-do_logit??
 
 
 #--------------------------SECTION 0---------------------------------------
@@ -53,7 +52,7 @@ sig.name = 't-stats'
 
 #--------------------------SECTION 1---------------------------------------
 #IMPORT DATA -------
-df = pd.read_csv(main_dir+ 'task_4_kdfwh_w_dummies_wide.csv')
+df = pd.read_csv(main_dir+ 'task_4_kwh_w_dummies_wide.csv')
 df= df.dropna(axis = 0, how='any')
 
 #GET TARIFFS-------------
@@ -107,7 +106,7 @@ from fe_functions import *
 df_long = pd.read_csv(main_dir+ 'task_4_kwh_long.csv')
 
 #merge with df_logit
-df = pd.merge(df_long, df_logit)
+df = pd.merge(df_long, df_w)
 
 #create vars
 df['TP'] = 0 + ((df.trial==1) & (df.trt==1))
@@ -128,9 +127,9 @@ X = pd.concat([TP, P, mu], axis = 1)
 #demean x and y
 ids = df.ID
 y = demean(y, ids)
-x = demean(x, ids)
+X = demean(X, ids)
 
-#RUN FIXED EFFECTS (CODE TAKEN FROM DAN)
+#RUN FIXED EFFECTS ****(CODE TAKEN FROM DAN)****
 ## WITHOUT WEIGHTS
 fe_model = sm.OLS(y, X) # linearly prob model
 fe_results = fe_model.fit() # get the fitted values
